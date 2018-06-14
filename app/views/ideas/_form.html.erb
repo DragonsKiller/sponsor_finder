@@ -52,11 +52,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :publication_end_date %>
-    <%= form.date_select :publication_end_date, id: :idea_publication_end_date %>
-  </div>
-
-  <div class="field">
     <%= form.label :trader_id %>
     <%= form.select :trader_id, Trader.all.collect { |p| [ p.name, p.id ] } %>
   </div>
