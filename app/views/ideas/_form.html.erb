@@ -1,0 +1,67 @@
+<%= form_with(model: idea, local: true) do |form| %>
+  <% if idea.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+
+      <ul>
+      <% idea.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :idea_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :idea_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :problem %>
+    <%= form.text_area :problem, id: :idea_problem %>
+  </div>
+
+  <div class="field">
+    <%= form.label :industry %>
+    <%= form.text_field :industry, id: :idea_industry %>
+  </div>
+
+  <div class="field">
+    <%= form.label :team %>
+    <%= form.text_field :team, id: :idea_team %>
+  </div>
+
+  <div class="field">
+    <%= form.label :geographical_focus %>
+    <%= form.text_field :geographical_focus, id: :idea_geographical_focus %>
+  </div>
+
+  <div class="field">
+    <%= form.label :requirements %>
+    <%= form.text_field :requirements, id: :idea_requirements %>
+  </div>
+
+  <div class="field">
+    <%= form.label :next_steps %>
+    <%= form.text_area :next_steps, id: :idea_next_steps %>
+  </div>
+
+  <div class="field">
+    <%= form.label :publication_end_date %>
+    <%= form.date_select :publication_end_date, id: :idea_publication_end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :trader_id %>
+    <%= form.select :trader_id, Trader.all.collect { |p| [ p.name, p.id ] } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
