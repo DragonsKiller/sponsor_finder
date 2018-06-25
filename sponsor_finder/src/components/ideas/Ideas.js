@@ -1,23 +1,31 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import {browserHistory} from 'react-router';
-import IdeasList from './IdeasList'
-
+import IdeasList from './IdeasList';
+import axios from 'axios';
 class Ideas extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      ideas: []
+    }
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:3001/api/v1/ideas.json')
+    .then(response => {
+      console.log(response)
+      this.setState({ideas: response.data})
+    })
+    .catch(error => console.log(error))
+  }
+  
   render() {
-    const ideas = [
-      {
-        id: 1, name: "qwert", description: "dfghm", problem: "sdfghnm", industry: "dfvbn", team: "dfbnm", geographicalFocus: "dfgbnm", requirements: "dfgbn", nextSteps: "dfgbnm"
-      },
-      {
-        id: 3, name: "qwertq", description: "q", problem: "q", industry: "q", team: "q", geographicalFocus: "q", requirements: "q", nextSteps: "q"
-      }
-    ];
-    console.log(ideas);
+    console.log(this.state.ideas);
     return (
-      <IdeasList ideas = { ideas }/>
+      <IdeasList ideas = { this.state.ideas }/>
     );
   }
 }
@@ -26,7 +34,7 @@ class Ideas extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    courses: state.courses
+    courses: state.ideas
   };
 }
 

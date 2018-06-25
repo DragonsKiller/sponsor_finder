@@ -10,9 +10,9 @@ const IdeaRow = ({ idea }) => {
       <td>{ idea.problem }</td>
       <td>{ idea.industry }</td>
       <td>{ idea.team }</td>
-      <td>{ idea.geographicalFocus }</td>
+      <td>{ idea.geographical_focus }</td>
       <td>{ idea.requirements }</td>
-      <td>{ idea.nextSteps }</td>
+      <td>{ idea.next_steps }</td>
     </tr>
   );
 };
