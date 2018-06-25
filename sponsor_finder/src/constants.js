@@ -1,0 +1,1 @@
+export const LOAD_IDEAS_SUCCESS = 'LOAD_IDEAS_SUCCESS';
