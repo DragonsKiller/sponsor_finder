@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as courseActions from '../../actions/ideaActions';
+import * as ideaActions from '../../actions/ideaActions';
 import {browserHistory} from 'react-router';
 import IdeasList from './IdeasList';
 import axios from 'axios';
@@ -12,14 +12,17 @@ class Ideas extends React.Component {
     this.redirectToAddIdeaPage = this.redirectToAddIdeaPage.bind(this);
   }
 
+  componentDidMount() {
+    this.props.actions.loadIdeas();
+  }
+
   redirectToAddIdeaPage() {
-    browserHistory.push('/idea');
+    browserHistory.push('/ideas/new');
   }
 
   render() {
     const { ideas } = this.props;
 
-    console.log(ideas);
     return (
       <div>
         <h1>Ideas</h1>
@@ -43,7 +46,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(courseActions, dispatch)
+    actions: bindActionCreators(ideaActions, dispatch)
   };
 }
 

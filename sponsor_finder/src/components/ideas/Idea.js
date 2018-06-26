@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as ideaActions from '../../actions/ideaActions';
-import IdeaForm from './IdeaForm';
+import { Link } from "react-router";
+import Button from '@material-ui/core/Button';
 
-export class ManageIdeaPage extends React.Component {
+export class Idea extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -13,8 +14,7 @@ export class ManageIdeaPage extends React.Component {
       idea: Object.assign({}, props.idea),
       errors: {}
     };
-    this.updateIdeaState = this.updateIdeaState.bind(this);
-    this.saveIdea = this.saveIdea.bind(this);
+    this.deleteIdea = this.deleteIdea.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -26,33 +26,44 @@ export class ManageIdeaPage extends React.Component {
     return null;
    }
 
-  updateIdeaState(event) {
-    const field = event.target.name;
-    let idea = this.state.idea;
-    idea[field] = event.target.value;
-    return this.setState({ idea });
-  }
-
-  saveIdea(event) {
-    event.preventDefault();
-    this.props.actions.saveIdea(this.state.idea)
-    this.context.router.push('/')
-  }
+   deleteIdea(event) {
+     event.preventDefault();
+     this.props.actions.deleteIdea(this.state.idea.id)
+     this.context.router.push('/')
+   }
 
   render() {
+    const idea = this.state.idea;
     return (
-      <IdeaForm
-        onChange = { this.updateIdeaState }
-        onSave = { this.saveIdea }
-        idea = { this.state.idea }
-        errors = { this.state.errors }
-      />
+      <div>
+        <h1><Link to={`/ideas/${idea.id}`}>{ idea.name }</Link></h1>
+        <p>Description: { idea.description }</p>
+        <p>Problem: { idea.problem }</p>
+        <p>Industry: { idea.industry }</p>
+        <p>Team: { idea.team }</p>
+        <p>Geographical focus: { idea.geographical_focus }</p>
+        <p>Requirements: { idea.requirements }</p>
+        <p>Next steps: { idea.next_steps }</p>
+        <p>Trader: { idea.trader_id }</p>
+        <p>
+          <Link to={ `/ideas/${idea.id}/edit` }>
+            <Button variant="contained" size="medium" color="primary">
+              Edit
+            </Button>
+          </Link>
+          <Button variant="contained" size="medium" color="secondary" onClick={ this.deleteIdea }>
+            Delete
+          </Button>
+        </p>
+      </div>
     );
   }
 }
 
+
+
 //Pull in the React Router context so router is available on this.context.router.
-ManageIdeaPage.contextTypes = {
+Idea.contextTypes = {
   router: PropTypes.object
 };
 
@@ -77,6 +88,7 @@ function mapStateToProps(state, ownProps) {
   if (ideaId && state.ideas.length > 0) {
     idea = getIdeaById(state.ideas, ideaId);
   }
+
   return { idea };
 }
 
@@ -90,4 +102,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(ideaActions, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageIdeaPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Idea);
