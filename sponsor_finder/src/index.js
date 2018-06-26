@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Ideas from './components/ideas/Ideas';
-import { loadIdeas } from './actions/courseActions';
+import { loadIdeas } from './actions/ideaActions';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
@@ -10,6 +8,7 @@ import routes from './routes';
 
 const store = configureStore();
 store.dispatch(loadIdeas());
+console.log('store-test', store.getState());
 render(
   <Provider store = { store }>
     <Router history = { browserHistory } routes = { routes } />

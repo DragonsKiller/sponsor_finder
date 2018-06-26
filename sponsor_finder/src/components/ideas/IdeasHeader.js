@@ -13,6 +13,7 @@ const IdeasHeader = () => {
       <th>Geographical Focus</th>
       <th>Requirements</th>
       <th>Next Steps</th>
+      <th>Trader id</th>
     </tr>
   );
 }

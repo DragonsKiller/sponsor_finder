@@ -1,40 +1,43 @@
 import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as courseActions from '../../actions/courseActions';
+import * as courseActions from '../../actions/ideaActions';
 import {browserHistory} from 'react-router';
 import IdeasList from './IdeasList';
 import axios from 'axios';
+
 class Ideas extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      ideas: []
-    }
+  constructor(props, context) {
+    super(props, context);
+    this.redirectToAddIdeaPage = this.redirectToAddIdeaPage.bind(this);
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:3001/api/v1/ideas.json')
-    .then(response => {
-      console.log(response)
-      this.setState({ideas: response.data})
-    })
-    .catch(error => console.log(error))
+  redirectToAddIdeaPage() {
+    browserHistory.push('/idea');
   }
-  
+
   render() {
-    console.log(this.state.ideas);
+    const { ideas } = this.props;
+
+    console.log(ideas);
     return (
-      <IdeasList ideas = { this.state.ideas }/>
+      <div>
+        <h1>Ideas</h1>
+        <input type="submit"
+               value="Add Course"
+               className="btn btn-primary"
+               onClick={this.redirectToAddIdeaPage}
+        />
+      <IdeasList ideas = { ideas }/>
+      </div>
     );
   }
 }
 
 
-
 function mapStateToProps(state, ownProps) {
   return {
-    courses: state.ideas
+    ideas: state.ideas
   };
 }
 

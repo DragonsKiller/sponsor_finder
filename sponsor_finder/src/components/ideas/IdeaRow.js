@@ -13,6 +13,7 @@ const IdeaRow = ({ idea }) => {
       <td>{ idea.geographical_focus }</td>
       <td>{ idea.requirements }</td>
       <td>{ idea.next_steps }</td>
+      <td>{ idea.trader_id }</td>
     </tr>
   );
 };
