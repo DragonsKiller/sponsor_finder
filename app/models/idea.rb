@@ -3,6 +3,8 @@ class Idea < ApplicationRecord
   has_many :respondeds, dependent: :destroy
   has_many :investors, through: :respondeds
 
+  validates :name, :description, :problem, :industry, :team, :geographical_focus, :requirements, :next_steps, :trader_id, presence: true
+  
   before_create :add_publication_end_date
   after_create :send_email
 
