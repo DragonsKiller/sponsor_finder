@@ -10,9 +10,95 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20180618152504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "ideas", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.text "problem"
+    t.string "industry"
+    t.string "team"
+    t.string "geographical_focus"
+    t.string "requirements"
+    t.text "next_steps"
+    t.date "publication_end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "trader_id"
+    t.index ["trader_id"], name: "index_ideas_on_trader_id"
+  end
+
+  create_table "investors", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "name"
+    t.string "skype"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_investors_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_investors_on_reset_password_token", unique: true
+  end
+
+  create_table "respondeds", force: :cascade do |t|
+    t.bigint "idea_id"
+    t.bigint "investor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_respondeds_on_idea_id"
+    t.index ["investor_id"], name: "index_respondeds_on_investor_id"
+  end
+
+  create_table "traders", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "name"
+    t.string "skype"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_traders_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_traders_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "ideas", "traders"
+  add_foreign_key "respondeds", "ideas"
+  add_foreign_key "respondeds", "investors"
 end

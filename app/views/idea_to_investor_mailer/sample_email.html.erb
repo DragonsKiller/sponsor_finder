@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi Iharidla</h1>
+    <p>
+      We have a new idea!
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @idea.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @idea.description %>
+    </p>
+
+    <p>
+      <strong>Problem:</strong>
+      <%= @idea.problem %>
+    </p>
+
+    <p>
+      <strong>Industry:</strong>
+      <%= @idea.industry %>
+    </p>
+
+    <p>
+      <strong>Team:</strong>
+      <%= @idea.team %>
+    </p>
+
+    <p>
+      <strong>Geographical focus:</strong>
+      <%= @idea.geographical_focus %>
+    </p>
+
+    <p>
+      <strong>Requirements:</strong>
+      <%= @idea.requirements %>
+    </p>
+
+    <p>
+      <strong>Next steps:</strong>
+      <%= @idea.next_steps %>
+    </p>
+
+    <p>
+      <strong>Trader:</strong>
+      <%= @idea.trader.name %>
+    </p>
+
+    <%= button_to "Go to idea", get_url(@idea), method: :get %>
+
+  </body>
+</html>
