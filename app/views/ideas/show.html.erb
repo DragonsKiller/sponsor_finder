@@ -1,0 +1,55 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @idea.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @idea.description %>
+</p>
+
+<p>
+  <strong>Problem:</strong>
+  <%= @idea.problem %>
+</p>
+
+<p>
+  <strong>Industry:</strong>
+  <%= @idea.industry %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @idea.team %>
+</p>
+
+<p>
+  <strong>Geographical focus:</strong>
+  <%= @idea.geographical_focus %>
+</p>
+
+<p>
+  <strong>Requirements:</strong>
+  <%= @idea.requirements %>
+</p>
+
+<p>
+  <strong>Next steps:</strong>
+  <%= @idea.next_steps %>
+</p>
+
+<p>
+  <strong>Publication end date:</strong>
+  <%= @idea.publication_end_date %>
+</p>
+
+<p>
+  <strong>Trader:</strong>
+  <%= @idea.trader.name %>
+</p>
+<%= button_to "Go to idea", get_url(@idea), method: :get %>
+
+
+<%= link_to 'Edit', edit_idea_path(@idea) %> |
+<%= link_to 'Back', ideas_path %>
