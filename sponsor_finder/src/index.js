@@ -8,7 +8,6 @@ import routes from './routes';
 
 const store = configureStore();
 store.dispatch(loadIdeas());
-console.log('store-test', store.getState());
 render(
   <Provider store = { store }>
     <Router history = { browserHistory } routes = { routes } />

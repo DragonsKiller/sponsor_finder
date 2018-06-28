@@ -35,8 +35,11 @@ export class ManageIdeaPage extends React.Component {
 
   saveIdea(event) {
     event.preventDefault();
-    this.props.actions.saveIdea(this.state.idea)
-    this.context.router.push('/')
+    this.props.actions.saveIdea(this.state.idea).then(() => {
+      this.props.actions.loadIdeas().then(() => {
+        this.context.router.push('/');
+      });
+    });
   }
 
   render() {
@@ -66,7 +69,7 @@ function getIdeaById(ideas, id) {
 
 
 function mapStateToProps(state, ownProps) {
-  const ideaId = ownProps.params.id; // from the path `/idea/:id`
+  const ideaId = ownProps.params.id;
 
   let idea = {
       id: '', description: '', problem: '',

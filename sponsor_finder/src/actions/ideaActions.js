@@ -20,7 +20,6 @@ export function deleteIdeaSuccess(id) {
 export function loadIdeas() {
   return function(dispatch) {
     return axios.get('http://localhost:3001/api/v1/ideas.json').then(ideas => {
-      console.log('res ', ideas);
       dispatch(loadIdeasSuccess(ideas.data));
     }).catch(error => {
       throw(error);
@@ -30,13 +29,31 @@ export function loadIdeas() {
 
 export function saveIdea(idea) {
   return function(dispatch) {
-    dispatch(updateIdeaSuccess(idea));
-    dispatch(createIdeaSuccess(idea));
-  }
+    return axios.post( 'http://localhost:3001/api/v1/ideas', { idea }).then(() => {
+        dispatch(createIdeaSuccess(idea));
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }
+
+export function editIdea(idea) {
+  return function(dispatch) {
+    return axios.put( `http://localhost:3001/api/v1/ideas/${idea.id}`, { idea }).then(() => {
+      dispatch(updateIdeaSuccess(idea));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 
 export function deleteIdea(id) {
   return function(dispatch) {
-    dispatch(deleteIdeaSuccess(id));
-  }
+    axios.delete( 'http://localhost:3001/api/v1/ideas/' + id ).then(() => {
+      dispatch(deleteIdeaSuccess(id));
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }

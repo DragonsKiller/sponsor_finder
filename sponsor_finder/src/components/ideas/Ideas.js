@@ -22,12 +22,11 @@ class Ideas extends React.Component {
 
   render() {
     const { ideas } = this.props;
-
     return (
       <div>
         <h1>Ideas</h1>
         <input type="submit"
-               value="Add Course"
+               value="Add Idea"
                className="btn btn-primary"
                onClick={this.redirectToAddIdeaPage}
         />

@@ -29,8 +29,6 @@ export default function ideaReducer(state = initialState.ideas, action) {
 }
 
 const removeById = (state = initialState.ideas, id) => {
-  console.log('removeById');
   const ideas = state.filter(idea => idea.id !== id);
-  console.log( "del rem", ideas);
   return ideas;
 }
