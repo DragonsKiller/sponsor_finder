@@ -12,5 +12,5 @@ class Idea < ApplicationRecord
 end
 
 def send_email
-  IdeaToInvestorMailer.sample_email("iharidla@gmail.com", self).deliver_now
+  IdeaToInvestorMailer.sample_email("iharidla@gmail.com", self).deliver_later(wait: 1.seconds)
 end
