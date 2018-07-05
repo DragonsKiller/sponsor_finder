@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :traders
   devise_for :admins
 
+  post 'auth_trader' => 'authentication#authenticate_trader'
   namespace :api do
     namespace :v1 do
       resources :ideas
