@@ -17,6 +17,9 @@ class Trader < ApplicationRecord
 
   before_validation :downcase_email
 
+
+  has_many :pictures, as: :imageable
+
   private
 
   def downcase_email

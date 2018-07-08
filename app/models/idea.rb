@@ -16,6 +16,8 @@ class Idea < ApplicationRecord
   before_create :add_publication_end_date
   after_create :send_email
 
+  has_many :pictures, as: :imageable
+
   def add_publication_end_date
     self.publication_end_date = Date.today
   end

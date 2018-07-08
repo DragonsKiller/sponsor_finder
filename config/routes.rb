@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  resources :pictures
   devise_for :investors
   devise_for :traders
   devise_for :admins
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
   post 'auth_trader' => 'authentication#authenticate_trader'
   namespace :api do
     namespace :v1 do
+      match '/traders',   to: 'traders#index',   via: 'get'
       resources :ideas
     end
   end

@@ -61,3 +61,6 @@ gem 'sendgrid-ruby'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'phonelib'
 gem 'jwt'
+gem "paperclip", "~> 6.0.0"
+gem 'rails_admin', '~> 1.3'
+gem 'rails_admin_rollincode', git: 'https://github.com/DragonsKiller/rollincode_custom'
